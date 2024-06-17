@@ -1,0 +1,2 @@
+ALTER TABLE bill
+    MODIFY status VARCHAR (255) NULL;

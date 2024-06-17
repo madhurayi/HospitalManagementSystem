@@ -22,7 +22,6 @@ public class Bill extends BaseModel{
     @Column(nullable = false)
     private Date date;
 
-    @Column(nullable = false)
     private String status;
 
     @ManyToOne(cascade = CascadeType.ALL)
