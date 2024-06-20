@@ -2,8 +2,10 @@ package com.example.hospitalmanagementsystem.services;
 
 import com.example.hospitalmanagementsystem.models.Patient;
 import com.example.hospitalmanagementsystem.repositories.PatientRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @Service
@@ -13,9 +15,10 @@ public class PatientService {
         this.patientRepository = patientRepository;
     }
 
-    public List<Patient> getAllPatients(){
+    public Page<Patient> getAllPatients(int page, int size){
         try{
-            return patientRepository.findAll();
+            Pageable pageable=  PageRequest.of(page,size);
+            return patientRepository.findAll(pageable);
 
         }catch (Exception e) {
             System.out.println("Error in getAllPatients" + e.getMessage());

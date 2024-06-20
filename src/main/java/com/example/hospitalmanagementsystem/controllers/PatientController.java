@@ -2,6 +2,8 @@ package com.example.hospitalmanagementsystem.controllers;
 
 import com.example.hospitalmanagementsystem.models.Patient;
 import com.example.hospitalmanagementsystem.services.PatientService;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,13 +18,14 @@ public class PatientController {
     }
 
     @GetMapping
-    public List<Patient> getAllPatients() {
-        return patientService.getAllPatients();
+    public Page<Patient> getAllPatients(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "2") int size) {
+
+        return patientService.getAllPatients(page,size);
     }
 
     @GetMapping("/{id}")
-    public Patient getPatientById(@PathVariable long id) {
-        return patientService.getPatientById(id);
+    public ResponseEntity<?> getPatientById(@PathVariable long id) {
+        return ResponseEntity.ok(patientService.getPatientById(id));
     }
 
     @PostMapping
